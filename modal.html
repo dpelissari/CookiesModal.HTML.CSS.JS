@@ -1,0 +1,69 @@
+<html>
+<head>
+    <style type="text/css">
+        .modal { position:fixed; top:0; right:0; bottom:0; left:0; background:rgba(0, 0, 0, 0.8); z-index:99999; opacity:0; -webkit-transition:opacity 400ms ease-in; -moz-transition:opacity 400ms ease-in; transition:opacity 400ms ease-in; pointer-events:auto; }
+        .modal>div { width:450px; position:relative; margin:10% auto; padding:15px 15px; background:#fff; }
+        .fechar { position:absolute; width:32px; height:32px; right:0; top:-40px;background:url(ico-fechar.png) center no-repeat #ff4545; border-radius:50%; cursor:pointer; }
+    </style>
+</head>
+
+<body>
+
+    <div class="modal" id="modal">
+        <div>
+            <a onclick="fecharModal()" class="fechar"></a>
+            <a href="https://www.google.com.br">
+                <img src="https://images.unsplash.com/photo-1607082349566-187342175e2f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=450&q=350" alt="Imagem exemplo">
+            </a>
+        </div>
+    </div>
+
+    <!-- scripts para exemplo em jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+</body>
+<script type="text/javascript">
+
+    // exemplo com js puro 
+    {
+        // O evento DOMContentLoaded é acionado quando todo o HTML for completamente carregado
+        // e analisado, sem aguardar pelo CSS, imagens, e subframes para encerrar o carregamento
+        document.addEventListener("DOMContentLoaded", function() {
+            // cookie para exibir uma vez por dia
+            if(document.cookie.indexOf("modal") === -1) {
+                    setTimeout(function() {
+                        document.getElementById("modal").style.opacity = 1;
+                        var date = new Date();
+                        date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+                        document.cookie = "modal=2; expires=" + date.toUTCString() + "; path=/";
+                    }, 1000);
+            }
+        });
+
+        // fechar modal
+        function fecharModal() {
+            var modal = document.querySelector(".modal");
+            modal.style.display = "none";
+        }
+    }
+    
+    // exemplo usando jquery (para testar, descomentar este bloco e comentar o bloco com o exemplo em js puro)
+    {
+    // $(document).ready(function () {
+    //         // cookie para exibir uma vez por dia
+    //         if($.cookie("modal") == null){
+    //         setTimeout(function () {
+    //             $('#modal').css('opacity', 1);
+    //             var date = new Date();
+    //             date.setTime(date.getTime() + 24 * 60 * 60 * 1000);
+    //             $.cookie("modal", "2", {expires: date});
+    //         }, 1000);
+    // }});
+
+    // fechar modal
+    // function fecharModal() { $(".modal").css("display", "none"); }
+    }
+
+</script>
+
+</html>
